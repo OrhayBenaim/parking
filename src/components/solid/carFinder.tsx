@@ -11,6 +11,7 @@ async function postFormData(formData: FormData) {
 
 export default function CarFinder() {
   const [licensePlate, setLicensePlate] = createSignal("");
+  const [hasFile, setHasFile] = createSignal(false);
 
   const [formData, setFormData] = createSignal<FormData>();
   const [response] = createResource(formData, postFormData);
@@ -35,9 +36,18 @@ export default function CarFinder() {
             name="license"
             placeholder="License plate"
           />
+          <input
+            class="rounded w-full appearance-none border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none"
+            type="file"
+            onChange={(_) => {
+              setHasFile(true);
+            }}
+            accept="image/png, image/jpeg"
+            name="image"
+          />
           <button
             class="disabled:opacity-50 disabled:hover:bg-blue-500 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            disabled={!licensePlate()}
+            disabled={!licensePlate() && !hasFile()}
           >
             Search
           </button>
