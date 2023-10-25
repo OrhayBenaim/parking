@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Parking car finder">
+
+    <form action="/api/login" method="POST" >
+        <div class="flex flex-col gap-2">
+          <input
+            class="rounded w-full appearance-none border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none"
+            name="username"
+            placeholder="Username"
+          />
+          <input
+          class="rounded w-full appearance-none border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none"
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+
+
+</Layout>

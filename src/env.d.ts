@@ -6,6 +6,8 @@ declare namespace App {
 }
 interface ImportMetaEnv {
   readonly DATABASE_URL: string;
+  readonly JWT_SECRET_KEY: string;
+  readonly ADMIN_PASSWORD: string;
 }
 
 interface ImportMeta {
