@@ -15,10 +15,19 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const [user] = await db.execute(sql`
+  const user = await db.execute(sql`
   select * from users where cars ? ${license} limit 1
   `);
-  return new Response(JSON.stringify(user), {
+  if (user.rows.length === 0) {
+    return new Response(
+      JSON.stringify({
+        message: "User not found",
+      }),
+      { status: 404 },
+    );
+  }
+
+  return new Response(JSON.stringify(user.rows[0]), {
     status: 200,
   });
 };

@@ -21,7 +21,7 @@ interface Data {
   };
 }
 
-const client = postgres(process.env.DATABASE_URL || "", {
+const client = postgres(process.env.POSTGRES_URL || "", {
   max: 1,
 });
 const db: PostgresJsDatabase = drizzle(client);

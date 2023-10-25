@@ -4,7 +4,7 @@ import jsonb from "./jsonb.ts";
 export const users = pgTable(
   "users",
   {
-    phone: text("phone").primaryKey().notNull(),
+    phone: text("phone").notNull(),
     email: text("email"),
     name: text("name").notNull(),
     cars: jsonb("cars").notNull(),
