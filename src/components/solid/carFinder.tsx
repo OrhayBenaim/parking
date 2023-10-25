@@ -51,7 +51,7 @@ export default function CarFinder() {
               Phone: <a href={`tel:${response().phone}`}>{response().phone}</a>
             </div>
             <div>
-              Whatsap:{" "}
+              Whatsapp:{" "}
               <a href={`https://wa.me/${response().phone}`}>
                 {response().phone}
               </a>
