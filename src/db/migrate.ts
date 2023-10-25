@@ -42,7 +42,7 @@ fs.createReadStream(filePath)
 
     data[phone] = {
       name,
-      cars: licenses,
+      cars: [...licenses, ...(data[phone]?.cars || [])],
       phone,
     };
   })
