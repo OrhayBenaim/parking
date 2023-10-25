@@ -49,6 +49,7 @@ export default function CarFinder() {
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                       class="w-6 h-6 text-green-300"
+                      fill="none"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                       <g
