@@ -1,24 +1,33 @@
 {
+  "name": "",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "format": "prettier --w 'src/**/*'",
     "astro": "astro",
-    "xata": "xata",
-    "xata:init": "npx @xata.io/cli@latest init --schema=schema.template.json --codegen src/lib/xata.codegen.server.ts",
-    "xata:codegen": "xata codegen"
+    "migrate": "ts-node --esm ./src/db/migrate.ts"
   },
   "dependencies": {
-    "@astrojs/react": "^2.0.0",
-    "@astrojs/vercel": "^3.0.0",
-    "@types/react": "^18.0.25",
-    "@xata.io/client": "latest",
-    "astro": "^2.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@astrojs/solid-js": "^3.0.2",
+    "@astrojs/tailwind": "^5.0.1",
+    "astro": "^3.3.3",
+    "drizzle-orm": "^0.27.2",
+    "postgres": "^3.3.5",
+    "solid-js": "^1.4.3",
+    "tailwindcss": "^3.3.3",
+    "pg": "^8.11.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.19.12",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "dotenv": "^16.3.1",
+    "@types/node": "^20.8.8",
+    "ts-node": "10.9.1",
+    "fast-csv": "^4.3.6"
   }
 }
