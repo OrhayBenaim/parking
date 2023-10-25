@@ -105,28 +105,58 @@ export default function CarFinder() {
             </div>
           </div>
           <button
-            class="disabled:opacity-50 disabled:hover:bg-blue-500 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            disabled={!licensePlate() && !hasFile()}
+            class="flex justify-center items-center disabled:opacity-50 disabled:hover:bg-blue-500 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            disabled={(!licensePlate() && !hasFile()) || response.loading}
           >
-            Search
+            {response.loading ? (
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 38 38"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="#fff"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <g transform="translate(1 1)" stroke-width="2">
+                    <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 18 18"
+                        to="360 18 18"
+                        dur="1s"
+                        repeatCount="indefinite"
+                      />
+                    </path>
+                  </g>
+                </g>
+              </svg>
+            ) : (
+              "Search"
+            )}
           </button>
         </div>
       </form>
       <Suspense>
-        {response() && (
-          <>
-            <div>Name: {response().name}</div>
-            <div>
-              Phone: <a href={`tel:${response().phone}`}>{response().phone}</a>
-            </div>
-            <div>
-              Whatsapp:{" "}
-              <a href={`https://wa.me/${response().phone}`}>
-                {response().phone}
-              </a>
-            </div>
-          </>
-        )}
+        {response() &&
+          (response().name ? (
+            <>
+              <div>Name: {response().name}</div>
+              <div>
+                Phone:{" "}
+                <a href={`tel:${response().phone}`}>{response().phone}</a>
+              </div>
+              <div>
+                Whatsapp:{" "}
+                <a href={`https://wa.me/${response().phone}`}>
+                  {response().phone}
+                </a>
+              </div>
+            </>
+          ) : (
+            <div>Not found</div>
+          ))}
       </Suspense>
     </div>
   );
