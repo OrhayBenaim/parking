@@ -10,7 +10,6 @@ export const POST: APIRoute = async ({ cookies, request, url }) => {
     const username = data.get("username");
     const password = data.get("password");
 
-    console.log({ username, password, admin: import.meta.env.ADMIN_PASSWORD });
     if (username !== "admin" || password !== import.meta.env.ADMIN_PASSWORD) {
       throw new Error("Invalid username or password");
     }

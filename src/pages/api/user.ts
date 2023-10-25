@@ -29,12 +29,8 @@ export const POST: APIRoute = async ({ request }) => {
       },
     ).then((res) => res.json());
 
-    console.log(plate.results);
-
     const [result] = plate.results;
-
     license = result.plate;
-    console.log(result);
   }
 
   const user = await db.execute(sql`
@@ -45,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({
         message: "User not found",
       }),
-      { status: 404 },
+      { status: 401 },
     );
   }
 
