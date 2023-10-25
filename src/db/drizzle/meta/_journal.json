@@ -57,6 +57,20 @@
       "when": 1698179325274,
       "tag": "0007_red_russian",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1698258813250,
+      "tag": "0008_large_thing",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1698258944108,
+      "tag": "0009_salty_zuras",
+      "breakpoints": true
     }
   ]
 }

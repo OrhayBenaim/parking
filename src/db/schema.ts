@@ -15,3 +15,18 @@ export const users = pgTable(
     pk: unique("user_pk").on(table.phone),
   }),
 );
+
+export const notifications = pgTable(
+  "notifications",
+  {
+    phone: text("phone").notNull(),
+    endpoint: text("endpoint").notNull(),
+    p256dh: text("p256dh").notNull(),
+    auth: text("auth").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    pk: unique("notification_pk").on(table.phone),
+  }),
+);

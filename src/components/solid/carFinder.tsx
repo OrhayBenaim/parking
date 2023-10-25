@@ -21,6 +21,13 @@ export default function CarFinder() {
     setFormData(new FormData(e.target as HTMLFormElement));
   }
 
+  const notify = (phone: string) => {
+    fetch("/api/notify", {
+      method: "POST",
+      body: JSON.stringify({ phone }),
+    });
+  };
+
   const onChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
     setLicensePlate(e.currentTarget.value);
   };
@@ -153,6 +160,15 @@ export default function CarFinder() {
                   {response().phone}
                 </a>
               </div>
+              <button
+                type="button"
+                class="flex justify-center items-center disabled:opacity-50 disabled:hover:bg-blue-500 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => {
+                  notify(response().phone);
+                }}
+              >
+                Notify
+              </button>
             </>
           ) : (
             <div>Not found</div>

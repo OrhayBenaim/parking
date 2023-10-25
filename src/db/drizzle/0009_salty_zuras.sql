@@ -1,0 +1,1 @@
+ALTER TABLE "notifications" ALTER COLUMN "auth" SET DATA TYPE text;
