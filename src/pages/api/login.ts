@@ -1,16 +1,22 @@
 import { nanoid } from "nanoid";
 import { SignJWT } from "jose";
 import type { APIRoute } from "astro";
+import { sql } from "drizzle-orm";
+import { db } from "../../db/db";
 
 const secret = new TextEncoder().encode(import.meta.env.JWT_SECRET_KEY);
 
 export const POST: APIRoute = async ({ cookies, request, url }) => {
   try {
     const data = await request.formData();
-    const username = data.get("username");
-    const password = data.get("password");
+    const license = data.get("license");
+    const phone = data.get("phone");
 
-    if (username !== "admin" || password !== import.meta.env.ADMIN_PASSWORD) {
+    const user = await db.execute(sql`
+    select phone from users where cars ? ${license} and phone = ${phone} limit 1
+    `);
+
+    if (user.rows.length === 0) {
       throw new Error("Invalid username or password");
     }
     const token = await new SignJWT({})
