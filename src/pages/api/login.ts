@@ -17,14 +17,13 @@ export const POST: APIRoute = async ({ cookies, request, url }) => {
       .setProtectedHeader({ alg: "HS256" })
       .setJti(nanoid())
       .setIssuedAt()
-      .setExpirationTime("2h")
       .sign(secret);
 
     // set JWT as a cookie
     cookies.set("pf-token", token, {
       httpOnly: true,
       path: "/",
-      maxAge: 60 * 60 * 2, // 2 hours in seconds
+      maxAge: 60 * 60 * 24 * 365, // 1 year in seconds
     });
 
     // return a successful response
