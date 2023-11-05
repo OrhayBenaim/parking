@@ -12,6 +12,7 @@
     "migrate": "ts-node --esm ./src/db/migrate.ts"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.0.2",
     "@astrojs/solid-js": "^3.0.2",
     "@astrojs/tailwind": "^5.0.1",
     "@astrojs/vercel": "^5.1.0",
