@@ -8,8 +8,16 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  integrations: [tailwind(), solidJs({
-    include: ["**/solid/*"]
-  }), partytown()],
-  adapter: vercel()
+  integrations: [
+    tailwind(),
+    solidJs({
+      include: ["**/solid/*"],
+    }),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
+  ],
+  adapter: vercel(),
 });
