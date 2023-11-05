@@ -47,6 +47,7 @@ const verifyAuth = async (token?: string) => {
 };
 
 export const onRequest = defineMiddleware(async (context, next) => {
+  console.log("path", context.url.pathname);
   if (context.url.pathname === "/blocked") {
     return next();
   }
