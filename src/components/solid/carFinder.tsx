@@ -20,6 +20,11 @@ export default function CarFinder() {
   function submit(e: SubmitEvent) {
     e.preventDefault();
     setFormData(new FormData(e.target as HTMLFormElement));
+    gtag("event", "search", {
+      event_category: "search",
+      event_label: "search",
+      value: licensePlate(),
+    });
   }
 
   const onChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
@@ -154,6 +159,9 @@ export default function CarFinder() {
                   target="_blank"
                   rel="noopener noreferrer"
                   href={`tel:${response().phone}`}
+                  onClick={() => {
+                    gtag("event", "call");
+                  }}
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -196,6 +204,9 @@ export default function CarFinder() {
                   }?text=${PRE_FILLED_MESSAGE}`}
                   rel="noopener noreferrer"
                   class="flex w-14 h-14 justify-center items-center bg-green-500 text-white font-bold p-2 rounded"
+                  onClick={() => {
+                    gtag("event", "whatsapp");
+                  }}
                 >
                   <svg
                     fill="#ffffff"

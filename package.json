@@ -30,6 +30,7 @@
     "web-push": "^3.6.6"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.18",
     "@types/node": "^20.8.8",
     "@types/web-push": "^3.6.2",
     "dotenv": "^16.3.1",
