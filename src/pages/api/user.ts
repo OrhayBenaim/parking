@@ -1,8 +1,9 @@
 import type { APIRoute } from "astro";
 import { sql } from "drizzle-orm";
 import { db } from "../../db/db";
+import { mp } from "../../services/mixpanel";
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals, url, cookies }) => {
   const params = await request.formData();
   let license = params.get("license");
   const image = params.get("image");
@@ -14,6 +15,16 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 400 },
     );
   }
+
+  if (!locals.phone) {
+    cookies.delete("pf-token");
+    return Response.redirect(new URL("/login", url));
+  }
+
+  mp.track("search", {
+    distinct_id: locals.phone,
+    type: !license && image ? "image" : "license",
+  });
 
   if (!license && image) {
     let body = new FormData();

@@ -68,12 +68,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const cookie = context.cookies.get("pf-token");
   const token = cookie?.value;
   // Verify the token
-  const validationResult = await verifyAuth(token);
+  if (!token) {
+    return Response.redirect(new URL("/login", context.url));
+  }
 
+  const validationResult = await verifyAuth(token);
   // Handle the validation result
   switch (validationResult.status) {
     case "authorized":
       // Respond as usual if the user is authorised
+      context.locals.phone = validationResult.payload.phone as string;
       return next();
 
     case "error":

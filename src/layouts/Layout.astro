@@ -15,27 +15,6 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      type="text/partytown"
-      src="https://www.googletagmanager.com/gtag/js?id=G-P2PP60H5XV"></script>
-    <script type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-
-      window.gtag = function () {
-        dataLayer.push(arguments);
-      };
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-P2PP60H5XV", {
-        first_party_collection: true,
-      });
-    </script>
   </head>
   <body class="flex justify-center items-center h-screen w-screen">
     <slot />

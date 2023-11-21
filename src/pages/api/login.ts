@@ -3,6 +3,7 @@ import { SignJWT } from "jose";
 import type { APIRoute } from "astro";
 import { sql } from "drizzle-orm";
 import { db } from "../../db/db";
+import { mp } from "../../services/mixpanel";
 
 const secret = new TextEncoder().encode(import.meta.env.JWT_SECRET_KEY);
 
@@ -12,14 +13,26 @@ export const POST: APIRoute = async ({ cookies, request, url }) => {
     const license = data.get("license");
     const phone = data.get("phone");
 
+    if (!phone || !license) {
+      throw new Error("Missing params");
+    }
     const user = await db.execute(sql`
-    select phone from users where cars ? ${license} and phone = ${phone} limit 1
+    select phone,cars from users where cars ? ${license} and phone = ${phone} limit 1
     `);
 
     if (user.rows.length === 0) {
       throw new Error("Invalid username or password");
     }
-    const token = await new SignJWT({})
+
+    mp.track("login", {
+      distinct_id: phone.toString(),
+    });
+    mp.people.set(phone.toString(), {
+      cars: user.rows[0].cars,
+    });
+    const token = await new SignJWT({
+      phone,
+    })
       .setProtectedHeader({ alg: "HS256" })
       .setJti(nanoid())
       .setIssuedAt()

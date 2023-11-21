@@ -12,7 +12,6 @@
     "migrate": "ts-node --esm ./src/db/migrate.ts"
   },
   "dependencies": {
-    "@astrojs/partytown": "^2.0.2",
     "@astrojs/solid-js": "^3.0.2",
     "@astrojs/tailwind": "^5.0.1",
     "@astrojs/vercel": "^5.1.0",
@@ -22,6 +21,7 @@
     "astro": "^3.3.3",
     "drizzle-orm": "^0.27.2",
     "jose": "^4.15.4",
+    "mixpanel": "^0.18.0",
     "nanoid": "^5.0.2",
     "pg": "^8.11.1",
     "postgres": "^3.3.5",
@@ -30,7 +30,6 @@
     "web-push": "^3.6.6"
   },
   "devDependencies": {
-    "@types/gtag.js": "^0.0.18",
     "@types/node": "^20.8.8",
     "@types/web-push": "^3.6.2",
     "dotenv": "^16.3.1",
