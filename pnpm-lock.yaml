@@ -31,6 +31,9 @@ dependencies:
   mixpanel:
     specifier: ^0.18.0
     version: 0.18.0
+  mixpanel-browser:
+    specifier: ^2.48.1
+    version: 2.48.1
   nanoid:
     specifier: ^5.0.2
     version: 5.0.2
@@ -51,6 +54,9 @@ dependencies:
     version: 3.6.6
 
 devDependencies:
+  '@types/mixpanel-browser':
+    specifier: ^2.47.5
+    version: 2.47.5
   '@types/node':
     specifier: ^20.8.8
     version: 20.8.8
@@ -1179,6 +1185,10 @@ packages:
     dependencies:
       '@types/unist': 3.0.1
     dev: false
+
+  /@types/mixpanel-browser@2.47.5:
+    resolution: {integrity: sha512-qEKrYSN4nUCPLU39YCoF2vszON0KUkPox0mFlrvhdq+amE44CB25+rdfZV4M9n3pEggXuRH+fbdP9qxthvyFUw==}
+    dev: true
 
   /@types/ms@0.7.33:
     resolution: {integrity: sha512-AuHIyzR5Hea7ij0P9q7vx7xu4z0C28ucwjAZC0ja7JhINyCnOw8/DnvAPQQ9TfOlCtZAmCERKQX9+o1mgQhuOQ==}
@@ -3623,6 +3633,10 @@ packages:
     dependencies:
       minipass: 3.3.6
       yallist: 4.0.0
+    dev: false
+
+  /mixpanel-browser@2.48.1:
+    resolution: {integrity: sha512-vXTuUzZMg+ht7sRqyjtc3dUDy/81Z/H6FLFgFkUZJqKFaAqcx1JSXmOdY/2kmsxCkUdy5JN5zW9m9TMCk+rxGQ==}
     dev: false
 
   /mixpanel@0.18.0:

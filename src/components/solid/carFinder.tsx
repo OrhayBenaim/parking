@@ -1,4 +1,5 @@
 import { createResource, createSignal, Suspense, type JSX } from "solid-js";
+import { mpClient } from "../../services/mixpanel.client";
 
 async function postFormData(formData: FormData) {
   const response = await fetch("/api/user", {
@@ -8,23 +9,20 @@ async function postFormData(formData: FormData) {
   const data = await response.json();
   return data;
 }
-
 const PRE_FILLED_MESSAGE = `היי תוכל/י בבקשה לשחרר אותי מהחנייה? תודה רבה`;
-export default function CarFinder() {
+
+interface CarFinderProps {
+  id: string;
+}
+export default function CarFinder(props: CarFinderProps) {
   const [licensePlate, setLicensePlate] = createSignal("");
   const [hasFile, setHasFile] = createSignal(false);
-
   const [formData, setFormData] = createSignal<FormData>();
   const [response] = createResource(formData, postFormData);
 
   function submit(e: SubmitEvent) {
     e.preventDefault();
     setFormData(new FormData(e.target as HTMLFormElement));
-    gtag("event", "search", {
-      event_category: "search",
-      event_label: "search",
-      value: licensePlate(),
-    });
   }
 
   const onChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
@@ -160,7 +158,12 @@ export default function CarFinder() {
                   rel="noopener noreferrer"
                   href={`tel:${response().phone}`}
                   onClick={() => {
-                    gtag("event", "call");
+                    mpClient.track("call", {
+                      $distinct_id: props.id,
+                      $user_id: props.id,
+                      $device_id: null,
+                      search: response().phone,
+                    });
                   }}
                 >
                   <svg
@@ -205,7 +208,12 @@ export default function CarFinder() {
                   rel="noopener noreferrer"
                   class="flex w-14 h-14 justify-center items-center bg-green-500 text-white font-bold p-2 rounded"
                   onClick={() => {
-                    gtag("event", "whatsapp");
+                    mpClient.track("whatsapp", {
+                      $distinct_id: props.id,
+                      $device_id: null,
+                      $user_id: props.id,
+                      search: response().phone,
+                    });
                   }}
                 >
                   <svg

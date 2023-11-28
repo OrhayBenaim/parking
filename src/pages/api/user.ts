@@ -21,12 +21,9 @@ export const POST: APIRoute = async ({ request, locals, url, cookies }) => {
     return Response.redirect(new URL("/login", url));
   }
 
-  mp.track("search", {
-    distinct_id: locals.phone,
-    type: !license && image ? "image" : "license",
-  });
+  const type = !license && image ? "image" : "license";
 
-  if (!license && image) {
+  if (type === "image") {
     let body = new FormData();
     body.append("upload", image);
     const plate = await fetch(
@@ -43,6 +40,12 @@ export const POST: APIRoute = async ({ request, locals, url, cookies }) => {
     const [result] = plate.results;
     license = result.plate;
   }
+
+  mp.track("search", {
+    distinct_id: locals.phone,
+    type,
+    search: license,
+  });
 
   const user = await db.execute(sql`
   select * from users where cars ? ${license} limit 1

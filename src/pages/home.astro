@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CarFinder from "../components/solid/carFinder";
+
+const locals = Astro.locals;
 ---
 
 <Layout title="Parking car finder">
-  <CarFinder client:visible />
+  <CarFinder client:visible id={locals.phone} />
 </Layout>
